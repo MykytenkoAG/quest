@@ -1,0 +1,59 @@
+package ua.javarush.mykytenko.quest;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
+
+@WebServlet(name = "initServlet", value = "/start")
+public class InitServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
+        // Создание новой сессии
+        HttpSession currentSession = req.getSession();
+
+        // Для показа модального окна приветствия
+        if(currentSession.isNew()){
+            Cookie cookie = new Cookie("newQuest","true");
+            resp.addCookie(cookie);
+        }
+
+        //  Считываем JSON и сохраняем дерево квеста
+        File dir = new File(getServletContext().getRealPath("/"));
+        dir = dir.getParentFile().getParentFile();
+        File file = new File(dir+"/src/main/resources/txt/questTree.json");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        QuestTree questTree = objectMapper.readValue(file, QuestTree.class);
+
+        //  Сохранение в сессию текущего вопроса квеста
+        currentSession.setAttribute("questTree", questTree);
+
+        //  Обновляем текст и надписи на кнопках
+        QuestTree.refreshButtons(questTree, currentSession);
+
+        //  Сохранение в сессию IP-адреса клиента
+        String remoteAddr = req.getRemoteAddr();
+        currentSession.setAttribute("remoteAddr", remoteAddr);
+
+        //  Задаем имя игрока
+        if(currentSession.getAttribute("playerName")==null){
+            currentSession.setAttribute("playerName", "Unnamed_Player");
+        }
+
+        //  Обнуляем счетчик сыгранных игр
+        if(currentSession.getAttribute("gamesCount")==null){
+            currentSession.setAttribute("gamesCount", 0);
+        }
+
+        Cookie cookie = new Cookie("playerName", (String) currentSession.getAttribute("playerName"));
+        resp.addCookie(cookie);
+
+        // Перенаправление запроса на страницу index.jsp через сервер
+        getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+
+    }
+}
