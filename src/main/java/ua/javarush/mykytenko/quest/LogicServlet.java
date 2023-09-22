@@ -30,6 +30,13 @@ public class LogicServlet extends HttpServlet {
         if(questTree.getOption1()==null && questTree.getOption2()==null){
             int gamesCount = Integer.parseInt(String.valueOf(currentSession.getAttribute("gamesCount")) );
             currentSession.setAttribute("gamesCount",++gamesCount);
+            if(questTree.getVictory().equals("victory")){
+                Cookie cookie = new Cookie("victory","true");
+                resp.addCookie(cookie);
+            } else {
+                Cookie cookie = new Cookie("lose","true");
+                resp.addCookie(cookie);
+            }
         }
 
         //  Сохранение в сессию текущего вопроса квеста

@@ -51,6 +51,45 @@
     </div>
 </div>
 
+<div class="modal fade" id="victoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">ПОБЕДА</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="modalClose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body fs-5">
+                <img src="img/victory/135067.gif" width="100%">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="modalVictoryClose()">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="loseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">ПОРАЖЕНИЕ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="modalLoseClose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body fs-5">
+                <img src="img/lose/haha.gif" width="100%">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="modalLoseClose()">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row" style="margin-top: 10px; margin-right: 0px; margin-left: 0px;">
     <div class="col-6">
         <button type="button" class="btn btn-primary" onclick="window.location='/start'">
@@ -87,6 +126,13 @@
     </div>
 </div>
 
+<div class="container text-center mt-5">
+    <div class="col-12 text-center fs-2 mt-2 mb-2">
+        <img src="img/background/1.jpeg" id="gameoverimg">
+    </div>
+</div>
+
+
 <div class="col-4 position-absolute bottom-0 start-0 mt-0 mb-0 p-0">
     <table class="table text-left">
         <tbody>
@@ -119,13 +165,19 @@
             contentType: 'text/plain; charset=UTF-8;',
             async: false,
             success:  function(result) {
-                console.log("load");
-                console.log("cookie new: "+getCookie("newQuest"));
                 document.getElementById("prologueText").append(result.toString());
                 if(getCookie("newQuest")=="true"){
                     deleteCookie("newQuest");
                     setCookie("fromModal","true");
-                    $("#prologueModal").modal("show")
+                    $("#prologueModal").modal("show");
+                }
+                if(getCookie("victory")=="true"){
+                    deleteCookie("victory");
+                    $("#victoryModal").modal("show");
+                }
+                if(getCookie("lose")=="true"){
+                    deleteCookie("lose");
+                    $("#loseModal").modal("show");
                 }
             }
         });
@@ -135,6 +187,18 @@
 
         $("#prologueModal").modal("hide")
         deleteCookie("fromModal");
+    }
+
+
+    function modalVictoryClose(){
+
+        $("#victoryModal").modal("hide");
+    }
+
+
+    function modalLoseClose(){
+
+        $("#loseModal").modal("hide");
     }
 
     function restart() {
