@@ -26,22 +26,42 @@ $("body").on('input', "#player_name", function() {
 });
 
 
-function download(url) {
-    const a = document.createElement('a')
-    a.href = url
-    a.download = url.split('/').pop()
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-}
-
 window.addEventListener("load", (event) => {
     if(getCookie("questTreeFileError")=="true"){
         deleteCookie("questTreeFileError");
         $("#modalError").modal("show");
     }
+    if(getCookie("infoQuestFileOK")=="true"){
+        deleteCookie("infoQuestFileOK");
+        $('#modal-info-message').append("Файл квеста успешно обновлен");
+        $("#modalInfo").modal("show");
+    }
+    if(getCookie("infoPrologueFileOK")=="true"){
+        deleteCookie("infoPrologueFileOK");
+        $('#modal-info-message').append("Файл предыстории квеста успешно обновлен");
+        $("#modalInfo").modal("show");
+    }
+    if(getCookie("infoBgImgOK")=="true"){
+        deleteCookie("infoBgImgOK");
+        $('#modal-info-message').append("Фоновый рисунок квеста успешно загружен");
+        $("#modalInfo").modal("show");
+    }
+    if(getCookie("infoPlayerNameChanged")=="true"){
+        deleteCookie("infoPlayerNameChanged");
+        $('#modal-info-message').append("Имя пользователя успешно изменено");
+        $("#modalInfo").modal("show");
+    }
+    if(getCookie("infoGamesCounterWasReset")=="true"){
+        deleteCookie("infoGamesCounterWasReset");
+        $('#modal-info-message').append("Счетчик игр сброшен");
+        $("#modalInfo").modal("show");
+    }
 });
 
-function modalClose(){
-    $("#modalError").modal("hide")
-}
+$("body").on('click', ".btn-close-modal-file-incorrect-format", function() {
+    $("#modalError").modal("hide");
+})
+
+$("body").on('click', ".btn-close-modal-info", function() {
+    $("#modalInfo").modal("hide");
+})

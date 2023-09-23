@@ -19,6 +19,8 @@ public class UploadPrologueFileServlet extends HttpServlet {
 
         Cookie cookie = new Cookie("newQuest","true");
         resp.addCookie(cookie);
+        Cookie cookiePrologueFileOK = new Cookie("infoPrologueFileOK","true");
+        resp.addCookie(cookiePrologueFileOK);
 
         getServletContext().getRequestDispatcher("/settings.jsp").forward(req, resp);
 

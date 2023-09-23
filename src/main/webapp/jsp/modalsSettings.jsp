@@ -64,8 +64,8 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="">Ошибка</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title">Ошибка</h5>
+        <button type="button" class="close btn-close-modal-file-incorrect-format" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -73,7 +73,26 @@
         Загруженный Вами файл имеет некорректный формат
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">ОК</button>
+        <button type="button" class="btn btn-secondary btn-close-modal-file-incorrect-format" data-dismiss="modal">ОК</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id=""></h5>
+        <button type="button" class="close btn-close-modal-info" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body fs-5" id="modal-info-message">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-close-modal-info" data-dismiss="modal">ОК</button>
       </div>
     </div>
   </div>

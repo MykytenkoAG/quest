@@ -32,6 +32,8 @@ public class UploadQuestFileServlet extends HttpServlet {
             Files.copy(newFile,oldFile);
             Cookie cookie = new Cookie("newQuest","true");
             resp.addCookie(cookie);
+            Cookie cookieQuestFileOK = new Cookie("infoQuestFileOK","true");
+            resp.addCookie(cookieQuestFileOK);
         } else {
             Cookie cookie = new Cookie("questTreeFileError","true");
             resp.addCookie(cookie);

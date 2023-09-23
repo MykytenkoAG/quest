@@ -16,6 +16,9 @@ public class ResetGamesCountServlet extends HttpServlet {
         HttpSession currentSession = req.getSession();
         currentSession.setAttribute("gamesCount", 0);
 
+        Cookie cookie = new Cookie("infoGamesCounterWasReset","true");
+        resp.addCookie(cookie);
+
         ServletContext servletContext = getServletContext();
         RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/settings.jsp");
         requestDispatcher.forward(req, resp);

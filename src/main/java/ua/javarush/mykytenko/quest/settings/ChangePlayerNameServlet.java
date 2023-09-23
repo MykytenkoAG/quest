@@ -28,8 +28,12 @@ public class ChangePlayerNameServlet extends HttpServlet {
         if(cookieMap.get("fromModal")!=null && cookieMap.get("fromModal").equals("true")){
             Cookie cookie = new Cookie("fromModal","false");
             resp.addCookie(cookie);
+            Cookie cookiePlayerNameChanged = new Cookie("infoPlayerNameChanged","true");
+            resp.addCookie(cookiePlayerNameChanged);
             getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
         } else {
+            Cookie cookie = new Cookie("infoPlayerNameChanged","true");
+            resp.addCookie(cookie);
             getServletContext().getRequestDispatcher("/settings.jsp").forward(req, resp);
         }
 
