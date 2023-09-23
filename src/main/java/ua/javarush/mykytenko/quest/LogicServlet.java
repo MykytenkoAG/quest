@@ -43,6 +43,11 @@ public class LogicServlet extends HttpServlet {
         currentSession.setAttribute("questTree", questTree);
         //  Обновляем тексты и видимость кнопок
         QuestTree.refreshButtons(questTree,currentSession);
+
+        resp.setHeader("Cache-Control","no-cache");
+        resp.setHeader("Pragma","no-cache");
+        resp.setHeader("Cache-Control","no-store");
+
         // Перенаправление запроса на страницу index.jsp через сервер
         getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
 

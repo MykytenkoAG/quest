@@ -15,6 +15,9 @@
 </head>
 <body>
 
+<audio src="audio/lose.mp3" id="audioLose"></audio>
+<audio src="audio/victory.mp3" id="audioVictory"></audio>
+
 <!-- Modal Prologue -->
 <div class="modal fade" id="prologueModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -60,7 +63,7 @@
                 </button>
             </div>
             <div class="modal-body fs-5">
-                <img src="img/victory/135067.gif" width="100%">
+                <img src="img/victory/victory.gif" width="100%">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="modalVictoryClose()">Закрыть</button>
@@ -68,7 +71,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="modal fade" id="loseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -80,7 +82,7 @@
                 </button>
             </div>
             <div class="modal-body fs-5">
-                <img src="img/lose/haha.gif" width="100%">
+                <img src="img/lose/lose.gif" width="100%">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="modalLoseClose()">Закрыть</button>
@@ -172,14 +174,18 @@
                 if(getCookie("victory")=="true"){
                     deleteCookie("victory");
                     $("#victoryModal").modal("show");
+                    $("#audioVictory").trigger("play");
                 }
                 if(getCookie("lose")=="true"){
                     deleteCookie("lose");
                     $("#loseModal").modal("show");
+                    $("#audioLose").prop("loop","true");
+                    $("#audioLose").trigger("play");
                 }
             }
         });
     });
+
     $("body").on('input', "#player_name", function() {
 
         let pattern = new RegExp(/^[a-zA-Zа-яА-Я']{1,15}$/);
@@ -196,7 +202,6 @@
     });
 
     function modalClose(){
-
         $("#prologueModal").modal("hide")
         deleteCookie("fromModal");
     }
@@ -210,6 +215,8 @@
 
     function modalLoseClose(){
 
+        $("#audioLose").prop("loop","false");
+        $("#audioLose").trigger("pause");
         $("#loseModal").modal("hide");
     }
 

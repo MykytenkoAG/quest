@@ -157,6 +157,22 @@
                     </form>
                 </tr>
                 <tr>
+                    <form method="post" action="/formBackgroundImg" enctype="multipart/form-data">
+                        <td class="fs-5 mt-1 mb-1" colspan="2">Загрузить новый фоновый рисунок</td>
+                        <td class="fs-5 mt-1 mb-1">
+                            <input class="form-control" name="newBackgroundImg" type="file" id="newBackgroundImg">
+                        </td>
+                        <td class="fs-5 mt-1 mb-1">
+                            <button type="submit" value="Upload" class="btn btn-primary" id="btn-upload-background-img" disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy2-fill" viewBox="0 0 16 16">
+                                    <path d="M12 2h-2v3h2V2Z"/>
+                                    <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v13A1.5 1.5 0 0 0 1.5 16h13a1.5 1.5 0 0 0 1.5-1.5V2.914a1.5 1.5 0 0 0-.44-1.06L14.147.439A1.5 1.5 0 0 0 13.086 0H1.5ZM4 6a1 1 0 0 1-1-1V1h10v4a1 1 0 0 1-1 1H4ZM3 9h10a1 1 0 0 1 1 1v5H2v-5a1 1 0 0 1 1-1Z"/>
+                                </svg>
+                            </button>
+                        </td>
+                    </form>
+                </tr>
+                <tr>
                     <form method="post" action="/formPlayerName">
                         <td class="fs-5 mt-1 mb-1" colspan="2">Имя игрока</td>
                         <td class="fs-5 mt-1 mb-1">
@@ -196,6 +212,9 @@
     });
     $("body").on('input', "#newQuestFile", function() {
         $("#btn-upload-quest-file").prop("disabled", false);
+    });
+    $("body").on('input', "#newBackgroundImg", function() {
+        $("#btn-upload-background-img").prop("disabled", false);
     });
     $("body").on('input', "#player_name", function() {
 

@@ -52,6 +52,10 @@ public class InitServlet extends HttpServlet {
         Cookie cookie = new Cookie("playerName", (String) currentSession.getAttribute("playerName"));
         resp.addCookie(cookie);
 
+        resp.setHeader("Cache-Control","no-cache");
+        resp.setHeader("Pragma","no-cache");
+        resp.setHeader("Cache-Control","no-store");
+
         // Перенаправление запроса на страницу index.jsp через сервер
         getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
 
