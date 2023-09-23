@@ -7,7 +7,7 @@
     <link href="static/main.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
-    <script src="<c:url value="/static/jquery-3.6.0.min.js"/>"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="cache-control" content="max-age=0" />
     <meta http-equiv="Pragma" content="no-cache" />
@@ -131,7 +131,7 @@
                             <input class="form-control" name="newQuestFile" type="file" id="newQuestFile">
                         </td>
                         <td class="fs-5 mt-1 mb-1">
-                            <button type="submit" value="Upload" class="btn btn-primary">
+                            <button type="submit" value="Upload" class="btn btn-primary" id="btn-upload-quest-file" disabled>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy2-fill" viewBox="0 0 16 16">
                                     <path d="M12 2h-2v3h2V2Z"/>
                                     <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v13A1.5 1.5 0 0 0 1.5 16h13a1.5 1.5 0 0 0 1.5-1.5V2.914a1.5 1.5 0 0 0-.44-1.06L14.147.439A1.5 1.5 0 0 0 13.086 0H1.5ZM4 6a1 1 0 0 1-1-1V1h10v4a1 1 0 0 1-1 1H4ZM3 9h10a1 1 0 0 1 1 1v5H2v-5a1 1 0 0 1 1-1Z"/>
@@ -147,7 +147,7 @@
                             <input class="form-control" name="newPrologueFile" type="file" id="newPrologueFile">
                         </td>
                         <td class="fs-5 mt-1 mb-1">
-                            <button type="submit" value="Upload" class="btn btn-primary">
+                            <button type="submit" value="Upload" class="btn btn-primary" id="btn-upload-prologue-file" disabled>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy2-fill" viewBox="0 0 16 16">
                                     <path d="M12 2h-2v3h2V2Z"/>
                                     <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v13A1.5 1.5 0 0 0 1.5 16h13a1.5 1.5 0 0 0 1.5-1.5V2.914a1.5 1.5 0 0 0-.44-1.06L14.147.439A1.5 1.5 0 0 0 13.086 0H1.5ZM4 6a1 1 0 0 1-1-1V1h10v4a1 1 0 0 1-1 1H4ZM3 9h10a1 1 0 0 1 1 1v5H2v-5a1 1 0 0 1 1-1Z"/>
@@ -163,7 +163,7 @@
                             <input type="text" id="player_name" name="player_name" class="form-control" aria-describedby="passwordHelpBlock">
                         </td>
                         <td class="fs-5 mt-1 mb-1">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary" id="btn-change-player-name" disabled>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy2-fill" viewBox="0 0 16 16">
                                     <path d="M12 2h-2v3h2V2Z"/>
                                     <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v13A1.5 1.5 0 0 0 1.5 16h13a1.5 1.5 0 0 0 1.5-1.5V2.914a1.5 1.5 0 0 0-.44-1.06L14.147.439A1.5 1.5 0 0 0 13.086 0H1.5ZM4 6a1 1 0 0 1-1-1V1h10v4a1 1 0 0 1-1 1H4ZM3 9h10a1 1 0 0 1 1 1v5H2v-5a1 1 0 0 1 1-1Z"/>
@@ -189,6 +189,29 @@
 </div>
 
 <script>
+
+    //  Разблокировка кнопок для загрузки файлов и изменения имени игрока
+    $("body").on('input', "#newPrologueFile", function() {
+        $("#btn-upload-prologue-file").prop("disabled", false);
+    });
+    $("body").on('input', "#newQuestFile", function() {
+        $("#btn-upload-quest-file").prop("disabled", false);
+    });
+    $("body").on('input', "#player_name", function() {
+
+        let pattern = new RegExp(/^[a-zA-Zа-яА-Я']{1,15}$/);
+        let player_name = document.getElementById("player_name");
+
+        if (pattern.test(player_name.value)) {
+            player_name.setAttribute("style", "font-weight: nomal; background-color: white; color:black;");
+            $("#btn-change-player-name").prop("disabled", false);
+        } else {
+            player_name.setAttribute("style", "font-weight: bold; background-color: pink; color:red;");
+            $("#btn-change-player-name").prop("disabled", true);
+        }
+
+    });
+
     function restart() {
         $.ajax({
             url: '/restart',
