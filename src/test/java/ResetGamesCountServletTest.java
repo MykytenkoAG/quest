@@ -15,23 +15,11 @@ public class ResetGamesCountServletTest {
     @Test
     public void testDoPost() throws Exception{
 
-        ServletConfig sc = mock( ServletConfig.class );
-        ServletContext ctx = mock( ServletContext.class );
-        when( sc.getServletContext()).thenReturn( ctx );
+        final ResetGamesCountServlet servlet = new ResetGamesCountServlet();
 
-        ResetGamesCountServlet clearGamesCountServlet = new ResetGamesCountServlet();
-        clearGamesCountServlet.init( sc );
-
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-        RequestDispatcher dispatcher = mock(RequestDispatcher.class);
-        HttpSession httpSession = mock(HttpSession.class);
-
-        when(request.getSession()).thenReturn(httpSession);
-        when(ctx.getRequestDispatcher(path)).thenReturn(dispatcher);
-
-/*        clearGamesCountServlet.doPost(request, response);
-        verify(dispatcher).forward(request, response);*/
+        final HttpServletRequest request = mock(HttpServletRequest.class);
+        final HttpServletResponse response = mock(HttpServletResponse.class);
+        final RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 
     }
 }
