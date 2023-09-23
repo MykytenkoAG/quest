@@ -1,4 +1,4 @@
-package ua.javarush.mykytenko.quest;
+package ua.javarush.mykytenko.quest.settings;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -11,10 +11,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import ua.javarush.mykytenko.quest.logic.QuestTree;
 
 @WebServlet(name = "questFileServlet", value = "/formQuestFile")
 @MultipartConfig
-public class QuestFileServlet extends HttpServlet {
+public class UploadQuestFileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         Part part = req.getPart("newQuestFile");

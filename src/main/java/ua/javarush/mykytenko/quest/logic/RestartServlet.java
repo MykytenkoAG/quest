@@ -1,4 +1,4 @@
-package ua.javarush.mykytenko.quest;
+package ua.javarush.mykytenko.quest.logic;
 
 import java.io.*;
 import jakarta.servlet.http.*;

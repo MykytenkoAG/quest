@@ -28,83 +28,7 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Инструкция</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body fs-5">
-                Файл квеста представляет собой json-файл, описывающий логическое дерево, со следующими ключами:
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <td class="fs-6 mt-1 mb-1">Ключ</td>
-                        <td class="fs-6 mt-1 mb-1">Тип</td>
-                        <td class="fs-6 mt-1 mb-1">Описание</td>
-                    </tr>
-                    <tr>
-                        <td class="fs-6 mt-1 mb-1">question</td>
-                        <td class="fs-6 mt-1 mb-1">строка</td>
-                        <td class="fs-6 mt-1 mb-1">вопрос, к которому прилагается два варианта ответа</td>
-                    </tr>
-                    <tr>
-                        <td class="fs-6 mt-1 mb-1">button1</td>
-                        <td class="fs-6 mt-1 mb-1">строка</td>
-                        <td class="fs-6 mt-1 mb-1">ответ 1</td>
-                    </tr>
-                    <tr>
-                        <td class="fs-6 mt-1 mb-1">option1</td>
-                        <td class="fs-6 mt-1 mb-1">объект</td>
-                        <td class="fs-6 mt-1 mb-1">узел дерева квеста, на которое пользователь попадает в случае выбора ответа 1</td>
-                    </tr>
-                    <tr>
-                        <td class="fs-6 mt-1 mb-1">button2</td>
-                        <td class="fs-6 mt-1 mb-1">строка</td>
-                        <td class="fs-6 mt-1 mb-1">ответ 2</td>
-                    </tr>
-                    <tr>
-                        <td class="fs-6 mt-1 mb-1">option2</td>
-                        <td class="fs-6 mt-1 mb-1">объект</td>
-                        <td class="fs-6 mt-1 mb-1">узел дерева квеста, на которое пользователь попадает в случае выбора ответа 2</td>
-                    </tr>
-                    <tr>
-                        <td class="fs-6 mt-1 mb-1">victory</td>
-                        <td class="fs-6 mt-1 mb-1">строка</td>
-                        <td class="fs-6 mt-1 mb-1">строка со значением "victory" или "loose", которая обозначает окончание квеста</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="modalError" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="">Ошибка</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body fs-5">
-                Загруженный Вами файл имеет некорректный формат
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">ОК</button>
-            </div>
-        </div>
-    </div>
-</div>
+<%@ include file='jsp/modalsSettings.jsp' %>
 
 <div class="container text-left mt-5">
     <div class="col-md-12 col-xl-8" style="margin-left: auto; margin-right: auto">
@@ -198,109 +122,12 @@
                     </td>
                     <td class="fs-5 mt-1 mb-1" colspan="2"></td>
                 </tr>
-
             </tbody>
         </table>
     </div>
 </div>
 
-<script>
-
-    //  Разблокировка кнопок для загрузки файлов и изменения имени игрока
-    $("body").on('input', "#newPrologueFile", function() {
-        $("#btn-upload-prologue-file").prop("disabled", false);
-    });
-    $("body").on('input', "#newQuestFile", function() {
-        $("#btn-upload-quest-file").prop("disabled", false);
-    });
-    $("body").on('input', "#newBackgroundImg", function() {
-        $("#btn-upload-background-img").prop("disabled", false);
-    });
-    $("body").on('input', "#player_name", function() {
-
-        let pattern = new RegExp(/^[a-zA-Zа-яА-Я']{1,15}$/);
-        let player_name = document.getElementById("player_name");
-
-        if (pattern.test(player_name.value)) {
-            player_name.setAttribute("style", "font-weight: nomal; background-color: white; color:black;");
-            $("#btn-change-player-name").prop("disabled", false);
-        } else {
-            player_name.setAttribute("style", "font-weight: bold; background-color: pink; color:red;");
-            $("#btn-change-player-name").prop("disabled", true);
-        }
-
-    });
-
-    function restart() {
-        $.ajax({
-            url: '/restart',
-            type: 'POST',
-            contentType: 'application/json;charset=UTF-8',
-            async: false,
-            success: function () {
-                location.reload();
-            }
-        });
-    }
-
-    function download(url) {
-        const a = document.createElement('a')
-        a.href = url
-        a.download = url.split('/').pop()
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
-    }
-
-    window.addEventListener("load", (event) => {
-        if(getCookie("questTreeFileError")=="true"){
-            deleteCookie("questTreeFileError");
-            $("#modalError").modal("show");
-        }
-    });
-
-    function modalClose(){
-        $("#modalError").modal("hide")
-    }
-
-    function getCookie(name) {
-        let matches = document.cookie.match(new RegExp(
-            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-        ));
-        return matches ? decodeURIComponent(matches[1]) : undefined;
-    }
-
-    function setCookie(name, value, options = {}) {
-
-        options = {
-            path: '/',
-            ...options
-        };
-
-        if (options.expires instanceof Date) {
-            options.expires = options.expires.toUTCString();
-        }
-
-        let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
-
-        for (let optionKey in options) {
-            updatedCookie += "; " + optionKey;
-            let optionValue = options[optionKey];
-            if (optionValue !== true) {
-                updatedCookie += "=" + optionValue;
-            }
-        }
-
-        document.cookie = updatedCookie;
-    }
-
-    function deleteCookie(name) {
-        setCookie(name, "", {
-            'max-age': -1
-        })
-    }
-</script>
-
+<script type="module" src="js/settings.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

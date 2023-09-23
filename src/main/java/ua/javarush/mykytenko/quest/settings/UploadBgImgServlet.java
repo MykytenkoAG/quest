@@ -1,4 +1,4 @@
-package ua.javarush.mykytenko.quest;
+package ua.javarush.mykytenko.quest.settings;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -9,7 +9,7 @@ import java.io.*;
 
 @WebServlet(name = "backgroundImgServlet", value = "/formBackgroundImg")
 @MultipartConfig
-public class BackgroundImgServlet extends HttpServlet {
+public class UploadBgImgServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 

@@ -1,4 +1,4 @@
-package ua.javarush.mykytenko.quest;
+package ua.javarush.mykytenko.quest.settings;
 
 import java.io.*;
 
@@ -9,7 +9,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 @WebServlet(name = "clearGamesCountServlet", value = "/clearGamesCount")
-public class ClearGamesCountServlet extends HttpServlet {
+public class ResetGamesCountServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 

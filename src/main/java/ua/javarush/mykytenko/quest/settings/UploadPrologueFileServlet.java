@@ -1,4 +1,4 @@
-package ua.javarush.mykytenko.quest;
+package ua.javarush.mykytenko.quest.settings;
 
 import java.io.*;
 import jakarta.servlet.ServletException;
@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.*;
 
 @WebServlet(name = "prologueFileServlet", value = "/formPrologueFile")
 @MultipartConfig
-public class PrologueFileServlet extends HttpServlet {
+public class UploadPrologueFileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 

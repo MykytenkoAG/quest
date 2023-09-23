@@ -1,4 +1,4 @@
-package ua.javarush.mykytenko.quest;
+package ua.javarush.mykytenko.quest.settings;
 
 import java.io.*;
 import java.util.Arrays;
@@ -10,7 +10,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 @WebServlet(name = "formsServlet", value = "/formPlayerName")
-public class PlayerNameServlet extends HttpServlet {
+public class ChangePlayerNameServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
