@@ -11,7 +11,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class RestartServletTest {
+    @Test
+    public void testDoGet() throws Exception{
 
+
+
+    }
     @Test
     public void testDoPost() throws Exception{
 

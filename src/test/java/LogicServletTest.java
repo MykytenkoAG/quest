@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 public class LogicServletTest {
 
     @Test
-    public void testDoPost() throws Exception{
+    public void testDoGet() throws Exception{
 
 
 
