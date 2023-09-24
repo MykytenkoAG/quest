@@ -38,9 +38,8 @@ public class InitServletTest {
     HttpServletResponse response;
     @Mock
     HttpSession session;
-
     @Mock
-    RequestDispatcher rd;
+    RequestDispatcher dispatcher;
 
     @Before
     protected void setUp() throws Exception {
@@ -52,9 +51,9 @@ public class InitServletTest {
         InitServlet servlet = new InitServlet();
         request = Mockito.mock(HttpServletRequest.class);
         response = Mockito.mock(HttpServletResponse.class);
-        when(request.getSession()).thenReturn(session);
-        RequestDispatcher dispatcher = Mockito.mock(RequestDispatcher.class);
-        HttpSession session = Mockito.mock(HttpSession.class);
+        dispatcher = Mockito.mock(RequestDispatcher.class);
+        session = Mockito.mock(HttpSession.class);
+
         Mockito.when(request.getSession()).thenReturn(session);
 
         ServletConfig sc = Mockito.mock( ServletConfig.class );
@@ -63,9 +62,7 @@ public class InitServletTest {
         //Mockito.when( servlet.getServletConfig()).thenReturn( sc );
         //Mockito.when( sc.getServletContext()).thenReturn( ctx );
 
-        //servlet.doGet(request, response);
-
-
+        servlet.doGet(request, response);
 
     }
 

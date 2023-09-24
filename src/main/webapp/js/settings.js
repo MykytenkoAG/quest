@@ -33,7 +33,7 @@ window.addEventListener("load", (event) => {
     }
     if(getCookie("infoQuestFileOK")=="true"){
         deleteCookie("infoQuestFileOK");
-        $('#modal-info-message').append("Файл квеста успешно обновлен");
+        $('#modal-info-message').append("Файл квеста успешно обновлен. Приятной игры");
         $("#modalInfo").modal("show");
     }
     if(getCookie("infoPrologueFileOK")=="true"){
@@ -43,7 +43,7 @@ window.addEventListener("load", (event) => {
     }
     if(getCookie("infoBgImgOK")=="true"){
         deleteCookie("infoBgImgOK");
-        $('#modal-info-message').append("Фоновый рисунок квеста успешно загружен");
+        $('#modal-info-message').append("Фоновый рисунок квеста успешно обновлен");
         $("#modalInfo").modal("show");
     }
     if(getCookie("infoPlayerNameChanged")=="true"){
@@ -53,7 +53,7 @@ window.addEventListener("load", (event) => {
     }
     if(getCookie("infoGamesCounterWasReset")=="true"){
         deleteCookie("infoGamesCounterWasReset");
-        $('#modal-info-message').append("Счетчик игр сброшен");
+        $('#modal-info-message').append("Счетчик игр успешно сброшен");
         $("#modalInfo").modal("show");
     }
 });
