@@ -12,7 +12,7 @@ import jakarta.servlet.annotation.*;
 @WebServlet(name = "formsServlet", value = "/formPlayerName")
 public class ChangePlayerNameServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         String playerName = req.getParameterMap().get("player_name")[0];
 
@@ -28,8 +28,6 @@ public class ChangePlayerNameServlet extends HttpServlet {
         if(cookieMap.get("fromModal")!=null && cookieMap.get("fromModal").equals("true")){
             Cookie cookie = new Cookie("fromModal","false");
             resp.addCookie(cookie);
-            Cookie cookiePlayerNameChanged = new Cookie("infoPlayerNameChanged","true");
-            resp.addCookie(cookiePlayerNameChanged);
             getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
         } else {
             Cookie cookie = new Cookie("infoPlayerNameChanged","true");

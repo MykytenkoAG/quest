@@ -2,6 +2,10 @@ package ua.javarush.mykytenko.quest.logic;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.*;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -10,7 +14,7 @@ import jakarta.servlet.annotation.*;
 public class InitServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         // Создание новой сессии
         HttpSession currentSession = req.getSession();
@@ -22,7 +26,10 @@ public class InitServlet extends HttpServlet {
         }
 
         //  Считываем JSON и сохраняем дерево квеста
-        File dir = new File(getServletContext().getRealPath("/"));
+        ServletConfig servletConfig =  this.getServletConfig();
+        ServletContext servletContext = servletConfig.getServletContext();
+
+        File dir = new File(servletContext.getRealPath("/"));
         dir = dir.getParentFile().getParentFile();
         File file = new File(dir+"/src/main/resources/txt/questTree.json");
 
@@ -57,7 +64,9 @@ public class InitServlet extends HttpServlet {
         resp.setHeader("Cache-Control","no-store");
 
         // Перенаправление запроса на страницу index.jsp через сервер
-        getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+        //ServletContext servletContext = getServletContext();
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/index.jsp");
+        requestDispatcher.forward(req, resp);
 
     }
 }
