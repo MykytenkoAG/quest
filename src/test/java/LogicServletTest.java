@@ -12,16 +12,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class LogicServletTest {
-
     @Test
     public void testDoGet() throws Exception{
-
         final LogicServlet servlet = new LogicServlet();
-
         final HttpServletRequest request = mock(HttpServletRequest.class);
         final HttpServletResponse response = mock(HttpServletResponse.class);
         final RequestDispatcher dispatcher = mock(RequestDispatcher.class);
-
     }
-
 }

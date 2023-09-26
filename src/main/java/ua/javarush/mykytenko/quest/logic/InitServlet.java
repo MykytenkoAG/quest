@@ -2,6 +2,7 @@ package ua.javarush.mykytenko.quest.logic;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.*;
+import java.util.ResourceBundle;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
@@ -9,6 +10,7 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import ua.javarush.mykytenko.quest.settings.Constants;
 
 @WebServlet(name = "initServlet", value = "/start")
 public class InitServlet extends HttpServlet {
@@ -31,7 +33,7 @@ public class InitServlet extends HttpServlet {
 
         File dir = new File(servletContext.getRealPath("/"));
         dir = dir.getParentFile().getParentFile();
-        File file = new File(dir+"/src/main/resources/txt/questTree.json");
+        File file = new File(dir+ Constants.PATH_TO_QUEST_FILE);
 
         ObjectMapper objectMapper = new ObjectMapper();
         QuestTree questTree = objectMapper.readValue(file, QuestTree.class);
@@ -64,9 +66,7 @@ public class InitServlet extends HttpServlet {
         resp.setHeader("Cache-Control","no-store");
 
         // Перенаправление запроса на страницу index.jsp через сервер
-        //ServletContext servletContext = getServletContext();
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/index.jsp");
         requestDispatcher.forward(req, resp);
-
     }
 }

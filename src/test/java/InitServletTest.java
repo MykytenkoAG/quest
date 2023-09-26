@@ -53,5 +53,4 @@ public class InitServletTest {
         servlet.doGet(request, response);
 
     }
-
 }

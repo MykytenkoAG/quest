@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.*;
 
 @WebServlet(name = "downloadServlet", value = "/downloadExample")
 public class DownloadQuestFileServlet extends HttpServlet {
-    private final int ARBITARY_SIZE = 1048;
+    private final int ARBITRARY_SIZE = 1048;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -17,12 +17,12 @@ public class DownloadQuestFileServlet extends HttpServlet {
 
         File dir = new File(getServletContext().getRealPath("/"));
         dir = dir.getParentFile().getParentFile();
-        File file = new File(dir+"/src/main/resources/txt/questTree.json");
+        File file = new File(dir+Constants.PATH_TO_QUEST_FILE);
 
         try(InputStream in = new FileInputStream(file);
             OutputStream out = resp.getOutputStream()) {
 
-            byte[] buffer = new byte[ARBITARY_SIZE];
+            byte[] buffer = new byte[ARBITRARY_SIZE];
 
             int numBytesRead;
             while ((numBytesRead = in.read(buffer)) > 0) {

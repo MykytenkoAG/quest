@@ -15,7 +15,7 @@ public class UploadPrologueFileServlet extends HttpServlet {
 
         File dir = new File(getServletContext().getRealPath("/"));
         dir = dir.getParentFile().getParentFile();
-        part.write(dir+"/src/main/resources/txt/prologue.txt");
+        part.write(dir+Constants.PATH_TO_PROLOGUE_FILE);
 
         Cookie cookie = new Cookie("newQuest","true");
         resp.addCookie(cookie);
@@ -30,7 +30,7 @@ public class UploadPrologueFileServlet extends HttpServlet {
 
         File dir = new File(getServletContext().getRealPath("/"));
         dir = dir.getParentFile().getParentFile();
-        String prologueFileName = dir+"/src/main/resources/txt/prologue.txt";
+        String prologueFileName = dir+Constants.PATH_TO_PROLOGUE_FILE;
 
         // Set the content type and header of the response.
         resp.setContentType("text/plain");

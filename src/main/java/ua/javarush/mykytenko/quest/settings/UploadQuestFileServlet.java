@@ -22,10 +22,10 @@ public class UploadQuestFileServlet extends HttpServlet {
 
         File dir = new File(getServletContext().getRealPath("/"));
         dir = dir.getParentFile().getParentFile();
-        part.write(dir+"/src/main/resources/txt/questTreeNew.json");
+        part.write(dir+Constants.PATH_TO_NEW_QUEST_FILE);
 
-        Path newFile = Paths.get(dir+"/src/main/resources/txt/questTreeNew.json");
-        Path oldFile = Paths.get(dir+"/src/main/resources/txt/questTree.json");
+        Path newFile = Paths.get(dir+Constants.PATH_TO_NEW_QUEST_FILE);
+        Path oldFile = Paths.get(dir+Constants.PATH_TO_QUEST_FILE);
 
         if( validateFile(newFile.toFile()) ){
             Files.delete(oldFile);
@@ -106,5 +106,4 @@ public class UploadQuestFileServlet extends HttpServlet {
             return false;
         }
     }
-
 }

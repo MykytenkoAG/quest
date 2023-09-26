@@ -10,12 +10,9 @@ public class UploadQuestFileServletTest {
 
     @Test
     public void testDoPost() throws Exception{
-
         final UploadQuestFileServlet servlet = new UploadQuestFileServlet();
-
         final HttpServletRequest request = mock(HttpServletRequest.class);
         final HttpServletResponse response = mock(HttpServletResponse.class);
         final RequestDispatcher dispatcher = mock(RequestDispatcher.class);
-
     }
 }

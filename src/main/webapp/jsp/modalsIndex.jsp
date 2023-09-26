@@ -2,8 +2,8 @@
 
 <script type="module" src="js/index.js"></script>
 
-<audio src="audio/lose.mp3" id="audioLose"></audio>
-<audio src="audio/victory.mp3" id="audioVictory"></audio>
+<audio src="../resources/audio/lose.mp3" id="audioLose"></audio>
+<audio src="../resources/audio/victory.mp3" id="audioVictory"></audio>
 
 <!-- Модальное окно с предысторией квеста -->
 <div class="modal fade" id="prologueModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -51,7 +51,7 @@
                 </button>
             </div>
             <div class="modal-body fs-5">
-                <img src="img/victory/victory.gif" width="100%">
+                <img src="../resources/img/victory/victory.gif" width="100%">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-modal-victory-close" data-dismiss="modal">Закрыть</button>
@@ -71,7 +71,7 @@
                 </button>
             </div>
             <div class="modal-body fs-5">
-                <img src="img/lose/lose.gif" width="100%">
+                <img src="../resources/img/lose/lose.gif" width="100%">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-modal-lose-close" data-dismiss="modal">Закрыть</button>

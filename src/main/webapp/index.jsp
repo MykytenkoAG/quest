@@ -7,7 +7,6 @@
         <title>Quest</title>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-        <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
         <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
         <meta http-equiv="cache-control" content="max-age=0" />
         <meta http-equiv="Pragma" content="no-cache" />
@@ -39,7 +38,7 @@
 <%--img--%>
 <div class="container text-center mt-5">
     <div class="col-12 text-center fs-2 mt-2 mb-2">
-        <img src="img/background/background.jpg" height="300px">
+        <img src="resources/img/background/background.jpg" height="300px">
     </div>
 </div>
 

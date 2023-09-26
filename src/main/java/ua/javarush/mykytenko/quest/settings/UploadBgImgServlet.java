@@ -17,7 +17,7 @@ public class UploadBgImgServlet extends HttpServlet {
 
         File dir = new File(getServletContext().getRealPath("/"));
         dir = dir.getParentFile().getParentFile();
-        part.write(dir+"/src/main/webapp/img/background/background.jpg");
+        part.write(dir+Constants.PATH_TO_BG_IMG_FILE);
 
         Cookie cookie = new Cookie("infoBgImgOK","true");
         resp.addCookie(cookie);
