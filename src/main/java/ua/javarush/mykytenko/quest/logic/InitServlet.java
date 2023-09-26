@@ -2,11 +2,7 @@ package ua.javarush.mykytenko.quest.logic;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.*;
-import java.util.ResourceBundle;
-
 import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletConfig;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -28,12 +24,11 @@ public class InitServlet extends HttpServlet {
         }
 
         //  Считываем JSON и сохраняем дерево квеста
-        ServletConfig servletConfig =  this.getServletConfig();
-        ServletContext servletContext = servletConfig.getServletContext();
+        File currDir = new File(req.getSession().getServletContext().getRealPath("/"));
+        File rootDir = currDir.getParentFile().getParentFile();
 
-        File dir = new File(servletContext.getRealPath("/"));
-        dir = dir.getParentFile().getParentFile();
-        File file = new File(dir+ Constants.PATH_TO_QUEST_FILE);
+
+        File file = new File(rootDir+ Constants.PATH_TO_QUEST_FILE);
 
         ObjectMapper objectMapper = new ObjectMapper();
         QuestTree questTree = objectMapper.readValue(file, QuestTree.class);

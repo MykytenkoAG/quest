@@ -7,9 +7,10 @@ import jakarta.servlet.http.HttpSession;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import ua.javarush.mykytenko.quest.logic.InitServlet;
+
+import java.io.File;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -43,12 +44,18 @@ public class InitServletTest {
         response = mock(HttpServletResponse.class);
         dispatcher = mock(RequestDispatcher.class);
         session = mock(HttpSession.class);
-        servletConfig = mock( ServletConfig.class );
-        servletContext = mock( ServletContext.class );
+        servletConfig = mock(ServletConfig.class);
+        servletContext = mock(ServletContext.class);
 
         when(request.getSession()).thenReturn(session);
-        when(servlet.getServletConfig()).thenReturn( servletConfig );
-        when(servletConfig.getServletContext()).thenReturn( servletContext );
+        when(session.getServletContext()).thenReturn(servletContext);
+
+        String currDir = InitServletTest.class.getResource("InitServletTest.class").toString()
+                .replaceAll("file:/", "")
+                .replaceAll("/target/test-classes/InitServletTest.class", "/src/main/");
+
+        when(servletContext.getRealPath("/")).thenReturn(currDir);
+        when(request.getRequestDispatcher("/index.jsp")).thenReturn(dispatcher);
 
         servlet.doGet(request, response);
 
