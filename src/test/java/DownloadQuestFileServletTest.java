@@ -1,14 +1,13 @@
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import ua.javarush.mykytenko.quest.logic.InitServlet;
 import ua.javarush.mykytenko.quest.settings.DownloadQuestFileServlet;
-import ua.javarush.mykytenko.quest.settings.ResetGamesCountServlet;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -47,7 +46,10 @@ public class DownloadQuestFileServletTest {
 
         when(servletContext.getRealPath("/")).thenReturn(currDir);
 
-        //servlet.doGet(request,response);
+        ServletOutputStream outputStream = mock(ServletOutputStream.class);
+        when(response.getOutputStream()).thenReturn(outputStream);
+
+        servlet.doGet(request,response);
 
     }
 }

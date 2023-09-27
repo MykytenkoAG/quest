@@ -1,6 +1,8 @@
 package ua.javarush.mykytenko.quest.logic;
 
 import java.io.*;
+
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -8,7 +10,7 @@ import jakarta.servlet.annotation.*;
 @WebServlet(name = "logicServlet", value = "/logic")
 public class LogicServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Получаем текущую сессию
         HttpSession currentSession = req.getSession(true);
 
@@ -30,13 +32,13 @@ public class LogicServlet extends HttpServlet {
         if(questTree.getOption1()==null && questTree.getOption2()==null){
             int gamesCount = Integer.parseInt(String.valueOf(currentSession.getAttribute("gamesCount")) );
             currentSession.setAttribute("gamesCount",++gamesCount);
+            Cookie cookie;
             if(questTree.getVictory().equals("victory")){
-                Cookie cookie = new Cookie("victory","true");
-                resp.addCookie(cookie);
+                cookie = new Cookie("victory","true");
             } else {
-                Cookie cookie = new Cookie("lose","true");
-                resp.addCookie(cookie);
+                cookie = new Cookie("lose","true");
             }
+            resp.addCookie(cookie);
         }
 
         //  Сохранение в сессию текущего вопроса квеста
@@ -49,7 +51,8 @@ public class LogicServlet extends HttpServlet {
         resp.setHeader("Cache-Control","no-store");
 
         // Перенаправление запроса на страницу index.jsp через сервер
-        getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/index.jsp");
+        requestDispatcher.forward(req, resp);
 
     }
 
