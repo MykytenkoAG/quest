@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -16,8 +17,9 @@ import ua.javarush.mykytenko.quest.logic.QuestTree;
 @WebServlet(name = "questFileServlet", value = "/formQuestFile")
 @MultipartConfig
 public class UploadQuestFileServlet extends HttpServlet {
+    private String path = "/settings.jsp";
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         Part part = req.getPart("newQuestFile");
 
         File currDir = new File(req.getSession().getServletContext().getRealPath("/"));
@@ -39,7 +41,8 @@ public class UploadQuestFileServlet extends HttpServlet {
             resp.addCookie(cookie);
         }
 
-        getServletContext().getRequestDispatcher("/settings.jsp").forward(req, resp);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(path);
+        requestDispatcher.forward(req, resp);
     }
 
     private boolean validateFile(File file){

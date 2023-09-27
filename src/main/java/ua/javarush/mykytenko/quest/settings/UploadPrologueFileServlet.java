@@ -1,6 +1,8 @@
 package ua.javarush.mykytenko.quest.settings;
 
 import java.io.*;
+
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -8,8 +10,9 @@ import jakarta.servlet.annotation.*;
 @WebServlet(name = "prologueFileServlet", value = "/formPrologueFile")
 @MultipartConfig
 public class UploadPrologueFileServlet extends HttpServlet {
+    private String path = "/settings.jsp";
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         Part part = req.getPart("newPrologueFile");
 
@@ -22,11 +25,12 @@ public class UploadPrologueFileServlet extends HttpServlet {
         Cookie cookiePrologueFileOK = new Cookie("infoPrologueFileOK","true");
         resp.addCookie(cookiePrologueFileOK);
 
-        getServletContext().getRequestDispatcher("/settings.jsp").forward(req, resp);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(path);
+        requestDispatcher.forward(req, resp);
 
     }
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         File currDir = new File(req.getSession().getServletContext().getRealPath("/"));
         File rootDir = currDir.getParentFile().getParentFile();
@@ -44,7 +48,5 @@ public class UploadPrologueFileServlet extends HttpServlet {
                 writer.println(line + "\n");
             }
         }
-
     }
-
 }

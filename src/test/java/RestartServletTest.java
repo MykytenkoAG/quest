@@ -55,5 +55,7 @@ public class RestartServletTest {
         when(request.getSession()).thenReturn(session);
         when(session.getServletContext()).thenReturn(servletContext);
 
+        servlet.doPost(request,response);
+
     }
 }

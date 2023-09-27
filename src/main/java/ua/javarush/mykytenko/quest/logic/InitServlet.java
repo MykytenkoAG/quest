@@ -10,7 +10,7 @@ import ua.javarush.mykytenko.quest.settings.Constants;
 
 @WebServlet(name = "initServlet", value = "/start")
 public class InitServlet extends HttpServlet {
-
+    private String path = "/index.jsp";
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
@@ -59,7 +59,7 @@ public class InitServlet extends HttpServlet {
         resp.setHeader("Cache-Control","no-store");
 
         // Перенаправление запроса на страницу index.jsp через сервер
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/index.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(path);
         requestDispatcher.forward(req, resp);
     }
 }

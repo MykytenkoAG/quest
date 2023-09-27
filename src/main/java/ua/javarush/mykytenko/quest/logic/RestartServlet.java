@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.*;
 @WebServlet(name = "restartServlet", value = "/restart")
 public class RestartServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.getSession().invalidate();
         resp.sendRedirect("/start");
     }
