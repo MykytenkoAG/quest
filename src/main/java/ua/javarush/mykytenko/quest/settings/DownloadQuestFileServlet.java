@@ -10,14 +10,14 @@ public class DownloadQuestFileServlet extends HttpServlet {
     private final int ARBITRARY_SIZE = 1048;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         resp.setContentType("text/plain");
         resp.setHeader("Content-disposition", "attachment; filename=questTree.json");
 
-        File dir = new File(getServletContext().getRealPath("/"));
-        dir = dir.getParentFile().getParentFile();
-        File file = new File(dir+Constants.PATH_TO_QUEST_FILE);
+        File currDir = new File(req.getSession().getServletContext().getRealPath("/"));
+        File rootDir = currDir.getParentFile().getParentFile();
+        File file = new File(rootDir+ Constants.PATH_TO_QUEST_FILE);
 
         try(InputStream in = new FileInputStream(file);
             OutputStream out = resp.getOutputStream()) {

@@ -20,12 +20,12 @@ public class UploadQuestFileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         Part part = req.getPart("newQuestFile");
 
-        File dir = new File(getServletContext().getRealPath("/"));
-        dir = dir.getParentFile().getParentFile();
-        part.write(dir+Constants.PATH_TO_NEW_QUEST_FILE);
+        File currDir = new File(req.getSession().getServletContext().getRealPath("/"));
+        File rootDir = currDir.getParentFile().getParentFile();
+        part.write(rootDir+Constants.PATH_TO_NEW_QUEST_FILE);
 
-        Path newFile = Paths.get(dir+Constants.PATH_TO_NEW_QUEST_FILE);
-        Path oldFile = Paths.get(dir+Constants.PATH_TO_QUEST_FILE);
+        Path newFile = Paths.get(rootDir+Constants.PATH_TO_NEW_QUEST_FILE);
+        Path oldFile = Paths.get(rootDir+Constants.PATH_TO_QUEST_FILE);
 
         if( validateFile(newFile.toFile()) ){
             Files.delete(oldFile);

@@ -26,8 +26,6 @@ public class InitServlet extends HttpServlet {
         //  Считываем JSON и сохраняем дерево квеста
         File currDir = new File(req.getSession().getServletContext().getRealPath("/"));
         File rootDir = currDir.getParentFile().getParentFile();
-
-
         File file = new File(rootDir+ Constants.PATH_TO_QUEST_FILE);
 
         ObjectMapper objectMapper = new ObjectMapper();

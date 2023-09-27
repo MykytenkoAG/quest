@@ -1,21 +1,45 @@
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import ua.javarush.mykytenko.quest.logic.RestartServlet;
 import ua.javarush.mykytenko.quest.settings.UploadBgImgServlet;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class UploadBgImgServletTest {
+    @Mock
+    HttpServletRequest request;
+    @Mock
+    HttpServletResponse response;
+    @Mock
+    HttpSession session;
+    @Mock
+    RequestDispatcher dispatcher;
+    @Mock
+    ServletConfig servletConfig;
+    @Mock
+    ServletContext servletContext;
+    UploadBgImgServlet servlet;
 
     @Test
     public void testDoPost() throws Exception{
 
-        final UploadBgImgServlet servlet = new UploadBgImgServlet();
+        servlet = new UploadBgImgServlet();
+        request = mock(HttpServletRequest.class);
+        response = mock(HttpServletResponse.class);
+        dispatcher = mock(RequestDispatcher.class);
+        session = mock(HttpSession.class);
+        servletConfig = mock(ServletConfig.class);
+        servletContext = mock(ServletContext.class);
 
-        final HttpServletRequest request = mock(HttpServletRequest.class);
-        final HttpServletResponse response = mock(HttpServletResponse.class);
-        final RequestDispatcher dispatcher = mock(RequestDispatcher.class);
+        when(request.getSession()).thenReturn(session);
+        when(session.getServletContext()).thenReturn(servletContext);
 
     }
 }

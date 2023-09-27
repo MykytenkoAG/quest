@@ -29,9 +29,7 @@ public class InitServletTest {
     ServletConfig servletConfig;
     @Mock
     ServletContext servletContext;
-
     InitServlet servlet;
-
     @Before
     protected void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
@@ -55,7 +53,7 @@ public class InitServletTest {
                 .replaceAll("/target/test-classes/InitServletTest.class", "/src/main/");
 
         when(servletContext.getRealPath("/")).thenReturn(currDir);
-        when(request.getRequestDispatcher("/index.jsp")).thenReturn(dispatcher);
+        when(request.getRequestDispatcher(path)).thenReturn(dispatcher);
 
         servlet.doGet(request, response);
 
