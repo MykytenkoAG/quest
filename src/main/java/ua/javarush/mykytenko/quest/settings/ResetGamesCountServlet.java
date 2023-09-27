@@ -11,7 +11,7 @@ import jakarta.servlet.annotation.*;
 @WebServlet(name = "clearGamesCountServlet", value = "/clearGamesCount")
 public class ResetGamesCountServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         HttpSession currentSession = req.getSession();
         currentSession.setAttribute("gamesCount", 0);
@@ -19,8 +19,7 @@ public class ResetGamesCountServlet extends HttpServlet {
         Cookie cookie = new Cookie("infoGamesCounterWasReset","true");
         resp.addCookie(cookie);
 
-        ServletContext servletContext = getServletContext();
-        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/settings.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/settings.jsp");
         requestDispatcher.forward(req, resp);
 
     }

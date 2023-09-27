@@ -39,6 +39,9 @@ public class ResetGamesCountServletTest {
 
         when(request.getSession()).thenReturn(session);
         when(session.getServletContext()).thenReturn(servletContext);
+        when(request.getRequestDispatcher(path)).thenReturn(dispatcher);
+
+        servlet.doPost(request,response);
 
     }
 }
