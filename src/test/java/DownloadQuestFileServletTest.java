@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import ua.javarush.mykytenko.quest.settings.DownloadQuestFileServlet;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class DownloadQuestFileServletTest {
     @Mock
@@ -25,6 +24,8 @@ public class DownloadQuestFileServletTest {
     ServletConfig servletConfig;
     @Mock
     ServletContext servletContext;
+    @Mock
+    ServletOutputStream outputStream;
     DownloadQuestFileServlet servlet;
     @Test
     public void testDoGet() throws Exception{
@@ -36,17 +37,14 @@ public class DownloadQuestFileServletTest {
         session = mock(HttpSession.class);
         servletConfig = mock(ServletConfig.class);
         servletContext = mock(ServletContext.class);
+        outputStream = mock(ServletOutputStream.class);
 
         when(request.getSession()).thenReturn(session);
         when(session.getServletContext()).thenReturn(servletContext);
-
         String currDir = InitServletTest.class.getResource("InitServletTest.class").toString()
                 .replaceAll("file:/", "")
                 .replaceAll("/target/test-classes/InitServletTest.class", "/src/main/");
-
         when(servletContext.getRealPath("/")).thenReturn(currDir);
-
-        ServletOutputStream outputStream = mock(ServletOutputStream.class);
         when(response.getOutputStream()).thenReturn(outputStream);
 
         servlet.doGet(request,response);

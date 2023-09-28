@@ -4,16 +4,11 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import ua.javarush.mykytenko.quest.logic.InitServlet;
 
-import java.io.File;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class InitServletTest {
     private final static String path = "/index.jsp";
@@ -30,10 +25,7 @@ public class InitServletTest {
     @Mock
     ServletContext servletContext;
     InitServlet servlet;
-    @Before
-    protected void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-    }
+
     @Test
     public void testDoGet() throws Exception{
 
@@ -47,15 +39,16 @@ public class InitServletTest {
 
         when(request.getSession()).thenReturn(session);
         when(session.getServletContext()).thenReturn(servletContext);
-
         String currDir = InitServletTest.class.getResource("InitServletTest.class").toString()
                 .replaceAll("file:/", "")
                 .replaceAll("/target/test-classes/InitServletTest.class", "/src/main/");
-
         when(servletContext.getRealPath("/")).thenReturn(currDir);
         when(request.getRequestDispatcher(path)).thenReturn(dispatcher);
 
         servlet.doGet(request, response);
+
+        verify(request, times(1)).getRequestDispatcher(path);
+        verify(dispatcher).forward(request, response);
 
     }
 }

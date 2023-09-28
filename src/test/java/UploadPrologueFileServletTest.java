@@ -8,12 +8,11 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import ua.javarush.mykytenko.quest.settings.UploadPrologueFileServlet;
-
 import java.io.PrintWriter;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import ua.javarush.mykytenko.quest.settings.UploadPrologueFileServlet;
+
+import static org.mockito.Mockito.*;
 
 public class UploadPrologueFileServletTest {
     private final static String path = "/settings.jsp";
@@ -29,6 +28,12 @@ public class UploadPrologueFileServletTest {
     ServletConfig servletConfig;
     @Mock
     ServletContext servletContext;
+    @Mock
+    ServletOutputStream outputStream;
+    @Mock
+    PrintWriter responseWriter;
+    @Mock
+    Part part;
     UploadPrologueFileServlet servlet;
     @Test
     public void testDoGet() throws Exception{
@@ -40,21 +45,17 @@ public class UploadPrologueFileServletTest {
         session = mock(HttpSession.class);
         servletConfig = mock(ServletConfig.class);
         servletContext = mock(ServletContext.class);
+        outputStream = mock(ServletOutputStream.class);
+        responseWriter = mock(PrintWriter.class);
 
         when(request.getSession()).thenReturn(session);
         when(session.getServletContext()).thenReturn(servletContext);
-
         String currDir = InitServletTest.class.getResource("InitServletTest.class").toString()
                 .replaceAll("file:/", "")
                 .replaceAll("/target/test-classes/InitServletTest.class", "/src/main/");
-
         when(servletContext.getRealPath("/")).thenReturn(currDir);
         when(request.getRequestDispatcher(path)).thenReturn(dispatcher);
-
-        ServletOutputStream outputStream = mock(ServletOutputStream.class);
         when(response.getOutputStream()).thenReturn(outputStream);
-
-        PrintWriter responseWriter = mock(PrintWriter.class);
         when(response.getWriter()).thenReturn(responseWriter);
 
         servlet.doGet(request,response);
@@ -70,29 +71,25 @@ public class UploadPrologueFileServletTest {
         session = mock(HttpSession.class);
         servletConfig = mock(ServletConfig.class);
         servletContext = mock(ServletContext.class);
+        outputStream = mock(ServletOutputStream.class);
+        responseWriter = mock(PrintWriter.class);
+        part = mock(Part.class);
 
         when(request.getSession()).thenReturn(session);
         when(session.getServletContext()).thenReturn(servletContext);
-
         String currDir = InitServletTest.class.getResource("InitServletTest.class").toString()
                 .replaceAll("file:/", "")
                 .replaceAll("/target/test-classes/InitServletTest.class", "/src/main/");
-
         when(servletContext.getRealPath("/")).thenReturn(currDir);
         when(request.getRequestDispatcher(path)).thenReturn(dispatcher);
-
-        ServletOutputStream outputStream = mock(ServletOutputStream.class);
         when(response.getOutputStream()).thenReturn(outputStream);
-
-        PrintWriter responseWriter = mock(PrintWriter.class);
         when(response.getWriter()).thenReturn(responseWriter);
-
-        Part part = mock(Part.class);
-
         when(request.getPart("newPrologueFile")).thenReturn(part);
 
         servlet.doPost(request,response);
 
+        verify(request, times(1)).getRequestDispatcher(path);
+        verify(dispatcher).forward(request, response);
 
     }
 }

@@ -6,11 +6,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import ua.javarush.mykytenko.quest.logic.InitServlet;
 import ua.javarush.mykytenko.quest.logic.RestartServlet;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class RestartServletTest {
     @Mock
@@ -40,6 +38,10 @@ public class RestartServletTest {
         when(request.getSession()).thenReturn(session);
         when(session.getServletContext()).thenReturn(servletContext);
 
+        servlet.doGet(request,response);
+
+        verify(request, times(1)).getSession();
+
     }
     @Test
     public void testDoPost() throws Exception{
@@ -56,6 +58,8 @@ public class RestartServletTest {
         when(session.getServletContext()).thenReturn(servletContext);
 
         servlet.doPost(request,response);
+
+        verify(request, times(1)).getSession();
 
     }
 }

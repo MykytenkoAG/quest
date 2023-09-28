@@ -6,10 +6,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import ua.javarush.mykytenko.quest.logic.InitServlet;
-import ua.javarush.mykytenko.quest.settings.ResetGamesCountServlet;
-
 import static org.mockito.Mockito.*;
+import ua.javarush.mykytenko.quest.settings.ResetGamesCountServlet;
 
 public class ResetGamesCountServletTest {
     private final static String path = "/settings.jsp";
@@ -42,6 +40,9 @@ public class ResetGamesCountServletTest {
         when(request.getRequestDispatcher(path)).thenReturn(dispatcher);
 
         servlet.doPost(request,response);
+
+        verify(request, times(1)).getRequestDispatcher(path);
+        verify(dispatcher).forward(request, response);
 
     }
 }
