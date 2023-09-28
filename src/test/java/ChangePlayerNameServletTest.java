@@ -51,6 +51,7 @@ public class ChangePlayerNameServletTest {
 
         servlet.doPost(request,response);
 
+        verify(request, times(1)).getParameterMap();
         verify(request, times(1)).getRequestDispatcher(path);
         verify(dispatcher).forward(request, response);
 

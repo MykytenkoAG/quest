@@ -49,5 +49,7 @@ public class DownloadQuestFileServletTest {
 
         servlet.doGet(request,response);
 
+        verify(response, times(1)).getOutputStream();
+
     }
 }

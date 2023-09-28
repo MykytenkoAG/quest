@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.*;
 
 @WebServlet(name = "logicServlet", value = "/logic")
 public class LogicServlet extends HttpServlet {
+    private String path = "/index.jsp";
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Получаем текущую сессию
@@ -51,7 +52,7 @@ public class LogicServlet extends HttpServlet {
         resp.setHeader("Cache-Control","no-store");
 
         // Перенаправление запроса на страницу index.jsp через сервер
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/index.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(path);
         requestDispatcher.forward(req, resp);
 
     }
