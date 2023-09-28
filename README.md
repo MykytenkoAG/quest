@@ -1,3 +1,5 @@
+![quest](https://github.com/MykytenkoAG/quest/blob/main/src/main/webapp/resources/img/background/background.jpg)
+
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
