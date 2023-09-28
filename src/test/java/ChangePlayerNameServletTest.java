@@ -1,6 +1,7 @@
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -9,6 +10,8 @@ import org.mockito.Mock;
 
 import ua.javarush.mykytenko.quest.logic.InitServlet;
 import ua.javarush.mykytenko.quest.settings.ChangePlayerNameServlet;
+
+import java.util.Map;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -43,7 +46,16 @@ public class ChangePlayerNameServletTest {
         when(request.getSession()).thenReturn(session);
         when(session.getServletContext()).thenReturn(servletContext);
 
-        //servlet.doPost(request,response);
+        Map<String,String[]> parameterMap = mock(Map.class);
+
+        when(request.getParameterMap()).thenReturn(parameterMap);
+        when(parameterMap.get("player_name")).thenReturn(new String[]{"player_name"});
+
+        when(request.getCookies()).thenReturn(new Cookie[]{new Cookie("fromModal","false")});
+
+        when(request.getRequestDispatcher(path)).thenReturn(dispatcher);
+
+        servlet.doPost(request,response);
 
     }
 }

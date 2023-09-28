@@ -8,11 +8,9 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import ua.javarush.mykytenko.quest.logic.RestartServlet;
 import ua.javarush.mykytenko.quest.settings.UploadPrologueFileServlet;
 
 import java.io.PrintWriter;
-import java.io.Writer;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
