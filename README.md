@@ -1,4 +1,4 @@
-![quest](https://github.com/MykytenkoAG/quest/blob/main/src/main/webapp/resources/img/background/background.jpg)
+![quest](https://lh3.googleusercontent.com/V9KP31An6g35-ruW4cWBZMfp-tG8T19cqu7y4kVGtZCCh-UEAo7sR7rCYDaOJ5KTAzOkdSTwq9d4WsyL-JxA07RlZl_rjyheb2zeGTM7d-EGLDyt--ZWj6zWu_NCAvmiHg=w693)
 
 ## Table of contents
 * [General info](#general-info)
