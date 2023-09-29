@@ -16,9 +16,7 @@ public class UploadPrologueFileServlet extends HttpServlet {
 
         Part part = req.getPart("newPrologueFile");
 
-        File currDir = new File(req.getSession().getServletContext().getRealPath("/"));
-        File rootDir = currDir.getParentFile().getParentFile();
-        part.write(rootDir+Constants.PATH_TO_PROLOGUE_FILE);
+        part.write(Commons.getRootDir(req)+ Commons.PATH_TO_PROLOGUE_FILE);
 
         Cookie cookie = new Cookie("newQuest","true");
         resp.addCookie(cookie);
@@ -32,9 +30,7 @@ public class UploadPrologueFileServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        File currDir = new File(req.getSession().getServletContext().getRealPath("/"));
-        File rootDir = currDir.getParentFile().getParentFile();
-        String prologueFileName = rootDir+Constants.PATH_TO_PROLOGUE_FILE;
+        String prologueFileName = Commons.getRootDir(req)+ Commons.PATH_TO_PROLOGUE_FILE;
 
         // Set the content type and header of the response.
         resp.setContentType("text/plain");

@@ -6,7 +6,7 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import ua.javarush.mykytenko.quest.settings.Constants;
+import ua.javarush.mykytenko.quest.settings.Commons;
 
 @WebServlet(name = "initServlet", value = "/start")
 public class InitServlet extends HttpServlet {
@@ -24,9 +24,7 @@ public class InitServlet extends HttpServlet {
         }
 
         //  Считываем JSON и сохраняем дерево квеста
-        File currDir = new File(req.getSession().getServletContext().getRealPath("/"));
-        File rootDir = currDir.getParentFile().getParentFile();
-        File file = new File(rootDir+ Constants.PATH_TO_QUEST_FILE);
+        File file = new File(Commons.getRootDir(req)+ Commons.PATH_TO_QUEST_FILE);
 
         ObjectMapper objectMapper = new ObjectMapper();
         QuestTree questTree = objectMapper.readValue(file, QuestTree.class);

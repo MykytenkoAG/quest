@@ -15,9 +15,7 @@ public class DownloadQuestFileServlet extends HttpServlet {
         resp.setContentType("text/plain");
         resp.setHeader("Content-disposition", "attachment; filename=questTree.json");
 
-        File currDir = new File(req.getSession().getServletContext().getRealPath("/"));
-        File rootDir = currDir.getParentFile().getParentFile();
-        File file = new File(rootDir+ Constants.PATH_TO_QUEST_FILE);
+        File file = new File(Commons.getRootDir(req)+ Commons.PATH_TO_QUEST_FILE);
 
         try(InputStream in = new FileInputStream(file);
             OutputStream out = resp.getOutputStream()) {
